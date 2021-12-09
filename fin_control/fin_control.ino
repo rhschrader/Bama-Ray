@@ -7,6 +7,8 @@
  *  
  *  This is code to control a soft robotic manta ray. Controls fin movement using two servo motors.
  *  
+ *  see https://github.com/rhschrader/Bama-Ray
+ *  
  *  Contact Ross Schrader at rhschrader@crimson.ua.edu with any questions
 */
 
@@ -50,7 +52,7 @@ int right_pos = 0;
 
 // boolean to track whether the sweep of the servo is moving up or down
 bool left_up = true;
-bool right_up = true;
+bool right_up = false;
 
 // starts and stops the flapping
 bool isRunning = false; 
@@ -148,13 +150,13 @@ void changeRight(){
   }
   // This block turns the robot left by decreasing the speed of the left fin and increasing the speed of the right fin
   if(input == 'a'){
-    right_rate = right_rate + 2;
+    right_rate = right_rate - 2;
     t.stop(rightControl);
     rightControl = t.every(right_rate, right_move, 100000);
   }
   // This block turns the robot right by decreasing the speed of the left fin and increasing the speed of the right fin
   if(input == 'd'){
-    right_rate = right_rate - 2;
+    right_rate = right_rate + 2;
     t.stop(rightControl);
     rightControl = t.every(right_rate, right_move, 100000);
   }
@@ -211,7 +213,7 @@ void changeLeft(){
   }
   // This block turns the stingray left by decreasing the speed of the left fin and increasing the speed of the right fin
   if(input == 'a'){
-    left_rate = left_rate - 2;
+    left_rate = left_rate + 2;
 
     t.stop(leftControl);
 
@@ -219,7 +221,7 @@ void changeLeft(){
   }
   // This block turns the stingray right by decreasing the speed of the left fin and increasing the speed of the right fin
   if(input == 'd'){
-    left_rate = left_rate + 2;
+    left_rate = left_rate - 2;
 
     t.stop(leftControl);
 
